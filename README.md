@@ -3,7 +3,7 @@
 This project is a simple "TODO" application using AWS Lambda and Serverless framework.
 
 # Project Rubric Description
-
+491959646282
 ## Rubric 1: Functionality
 
 ### The application allows users to create, update, delete items

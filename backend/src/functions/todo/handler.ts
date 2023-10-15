@@ -26,12 +26,27 @@ export const getTodos = middyfy(
   }
 );
 
+export const getTodo = middyfy(
+  async (event: APIGatewayProxyEvent): Promise<APIGatewayProxyResult> => {
+    const logger = createLogger("Logging: Get Todo by ID");
+
+    const userId = getUserId(event); 
+    const todoId = event.pathParameters.todoId;
+    logger.info("Logging: Getting Todo by ID");
+
+    const todo: Todo = await todoService.getByID(todoId, userId);
+
+    return formatJSONResponse(HttpStatusCode.Ok, {
+      item: todo,
+    });
+  }
+);
+
 export const createTodo = middyfy(
   async (event: APIGatewayProxyEvent): Promise<APIGatewayProxyResult> => {
     const logger = createLogger("Logging: Create new Todo");
     try {
       const userId = getUserId(event);
-
       const todoCreate: TodoCreate = event.body as any;
 
       logger.info("Logging: Creating a new Todo", todoCreate);

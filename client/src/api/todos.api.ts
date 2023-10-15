@@ -1,6 +1,7 @@
 import Axios from "axios";
 import { TodoCreate } from "../view-models/todo-create.view-model";
 import { TodoUpdate } from "../view-models/todo-update.view-model";
+import Todo from "../models/todo.model";
 
 export const getTodos = async (idToken: string) => {
   const response = await Axios.get(
@@ -53,6 +54,18 @@ export async function deleteTodo(idToken: string, todoId: string) {
       Authorization: `Bearer ${idToken}`,
     },
   });
+}
+export const getTodo = async (idToken: string, todoId: string) => {
+  const response = await Axios.get(
+    `${process.env.REACT_APP_API_ENDPOINT}/todos/${todoId}`,
+    {
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${idToken}`,
+      },
+    }
+  );
+  return response.data.item;
 }
 
 export async function getUploadUrl(idToken: string, todoId: string) {

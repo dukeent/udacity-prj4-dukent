@@ -19,6 +19,11 @@ export default class TodoService {
 
     return this.todoRepository.getAll(userId);
   }
+  
+  async getByID(userId: string, todoId: string): Promise<Todo> {
+    logger.info(`Service: Getting Todo by ID: ${todoId} for userId: ${userId}`);
+    return this.todoRepository.getById(todoId, userId);
+  }
 
   async create(todoCreate: TodoCreate, userId: string): Promise<Todo> {
     const todoId = v4();
